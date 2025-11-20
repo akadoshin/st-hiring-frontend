@@ -34,9 +34,8 @@ const EventCard = ({ event }: EventCardProps) => {
   };
 
   const handleViewTicket = () => {
-    // Pass tickets only when not using optimized events
     const tickets = !useOptimizedEvents ? event.availableTickets : undefined;
-    dispatch(openEventModal({ eventId: event.id, tickets }));
+    dispatch(openEventModal({ eventId: event.id, event, tickets }));
   };
 
   const headerContent = (

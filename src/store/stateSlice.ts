@@ -28,6 +28,7 @@ export interface StateState {
   settingsDrawerOpen: boolean;
   eventModalOpen: boolean;
   selectedEventId: number | null;
+  selectedEvent: Event | null;
   useOptimizedEvents: boolean;
   clientId: number;
   regularEvents: Event[];
@@ -37,6 +38,7 @@ const initialState: StateState = {
   settingsDrawerOpen: false,
   eventModalOpen: false,
   selectedEventId: null,
+  selectedEvent: null,
   useOptimizedEvents: getInitialUseOptimizedEvents(),
   clientId: getInitialClientId(),
   regularEvents: [],
@@ -54,10 +56,15 @@ const stateSlice = createSlice({
     },
     openEventModal: (
       state,
-      action: PayloadAction<{ eventId: number; tickets?: unknown[] }>
+      action: PayloadAction<{
+        eventId: number;
+        event: Event;
+        tickets?: unknown[];
+      }>
     ) => {
       state.eventModalOpen = true;
       state.selectedEventId = action.payload.eventId;
+      state.selectedEvent = action.payload.event;
     },
     setRegularEvents: (state, action: PayloadAction<Event[]>) => {
       state.regularEvents = action.payload;
@@ -65,6 +72,7 @@ const stateSlice = createSlice({
     closeEventModal: (state) => {
       state.eventModalOpen = false;
       state.selectedEventId = null;
+      state.selectedEvent = null;
     },
     setUseOptimizedEvents: (state, action: PayloadAction<boolean>) => {
       state.useOptimizedEvents = action.payload;

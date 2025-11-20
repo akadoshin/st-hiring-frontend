@@ -9,6 +9,7 @@ import {
   setUseOptimizedEvents,
   setClientId,
 } from "../store/stateSlice";
+import type { Event } from "../types/event";
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
@@ -26,8 +27,8 @@ export const useAppState = () => {
 
     openSettingsDrawer: () => dispatch(openSettingsDrawer()),
     closeSettingsDrawer: () => dispatch(closeSettingsDrawer()),
-    openEventModal: (eventId: number, tickets?: unknown[]) =>
-      dispatch(openEventModal({ eventId, tickets })),
+    openEventModal: (eventId: number, event: Event, tickets?: unknown[]) =>
+      dispatch(openEventModal({ eventId, event, tickets })),
     closeEventModal: () => dispatch(closeEventModal()),
     toggleUseOptimizedEvents: () =>
       dispatch(setUseOptimizedEvents(!state.useOptimizedEvents)),

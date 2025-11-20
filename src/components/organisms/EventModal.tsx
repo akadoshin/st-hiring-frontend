@@ -22,11 +22,8 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import { useAppDispatch, useAppSelector } from "../../hooks/useAppState";
 import { closeEventModal } from "../../store/stateSlice";
-import {
-  useGetOptimizedEventsQuery,
-  useGetOptimizedTicketsQuery,
-} from "../../store/api";
-import type { Event } from "../../types/event";
+import type { RootState } from "../../store/store";
+import { useGetOptimizedTicketsQuery } from "../../store/api";
 import type { Ticket } from "../../types/ticket";
 import { formatDate, formatTime, formatDay } from "../../utils/dateUtils";
 
@@ -34,25 +31,16 @@ const EventModal = () => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
 
-  const isOpen = useAppSelector((state) => state.state.eventModalOpen);
+  const isOpen = useAppSelector(
+    (state: RootState) => state.state.eventModalOpen
+  );
   const selectedEventId = useAppSelector(
-    (state) => state.state.selectedEventId
+    (state: RootState) => state.state.selectedEventId
   );
+  const event = useAppSelector((state: RootState) => state.state.selectedEvent);
   const useOptimizedEvents = useAppSelector(
-    (state) => state.state.useOptimizedEvents
+    (state: RootState) => state.state.useOptimizedEvents
   );
-  const regularEvents = useAppSelector((state) => state.state.regularEvents);
-
-  const { data: optimizedEventsResponse } = useGetOptimizedEventsQuery(
-    useOptimizedEvents ? { limit: 12 } : undefined,
-    {
-      skip: !useOptimizedEvents,
-    }
-  );
-
-  const optimizedEvents = optimizedEventsResponse?.events || [];
-  const events = useOptimizedEvents ? optimizedEvents : regularEvents;
-  const event = events.find((e: Event) => e.id === selectedEventId);
 
   const [optimizedTicketsCursor, setOptimizedTicketsCursor] = useState<
     number | undefined

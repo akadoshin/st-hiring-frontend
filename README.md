@@ -1,18 +1,55 @@
-# See Tickets Frontend challenge
+# See Tickets Frontend
 
-This project is a React application designed for a technical interview. The main objective is to create a user interface that interacts with a Node.js backend through various endpoints. The application will demonstrate the use of state management, forms, and UI frameworks such as Material-UI (MUI).
+A React application that displays events from a backend API with a responsive Material-UI interface.
 
-## Task
+## Features
 
-Create a single UI that consumes the endpoint `GET /events` from the backend API provided and shows a list of events returned by the API with the information of each event. Use components from MUI to create the UI.
+- **Event List**: Browse events in a responsive grid layout with virtual scrolling
+- **Settings**: Update application settings via a form drawer
+- **Optimized Fetching**: Toggle between standard and optimized event loading with pagination
+- **State Management**: Redux Toolkit for centralized state management
 
-- Use MUI to build a simple UI
-- The UI should be responsive
-- Use Redux as a store management
+## Tech Stack
 
-Create a form to update a settings object in the provided API (This API is part of the backend test)
+- **React 18** with TypeScript
+- **Material-UI (MUI)** for UI components
+- **Redux Toolkit** for state management
+- **Formik** with Yup for form handling
+- **React Virtuoso** for virtualized lists
+- **Vite** as the build tool
 
-- Use MUI to build a simple Form
-- The UI should be responsive
-- Use Redux as a store management
-- Use formik as the form components
+## Getting Started
+
+### Install Dependencies
+
+```bash
+yarn install
+```
+
+### Run Development Server
+
+```bash
+yarn dev
+```
+
+The app will be available at `http://localhost:5173`
+
+### Build for Production
+
+```bash
+yarn build
+```
+
+### Preview Production Build
+
+```bash
+yarn preview
+```
+
+## Project Structure
+
+- `src/components/` - UI components (atoms, molecules, organisms, templates)
+- `src/hooks/` - Custom React hooks
+- `src/store/` - Redux store and slices
+- `src/types/` - TypeScript type definitions
+- `src/utils/` - Utility functions
